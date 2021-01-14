@@ -1,18 +1,35 @@
+
 <%= form_for(@post) do |f| %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
 
 <div class="field">
   <label class="label">Post title</label>
+
   <div class="control">
-    <%= f.text_field :title, class: "input" %>
-  </div>
+    <% if @post.errors[:title].first %>
+        <%= f.text_field :title, class: "input is-danger" %>
+        </div>
+        <p class="help is-danger"><%= @post.errors[:title].first %></p>
+    <% else %>
+        <%= f.text_field :title, class: "input" %>
+        </div>
+    <% end %>     
 </div>
 
 <div class="field">
   <label class="label">Post content</label>
+
   <div class="control">
-     <%= f.text_area :content, class: "textarea" %>
-  </div>
+
+   <% if @post.errors[:content].first %>
+        <%= f.text_area :content, class: "textarea is-danger" %>
+        </div>
+        <p class="help is-danger"><%= @post.errors[:content].first %></p>
+    <% else %>
+            <%= f.text_area :content, class: "textarea" %>
+    </div>
+    <% end %>  
+
 </div>
 
 <div class="field is-grouped">
@@ -20,7 +37,7 @@
     <button class="button is-link">Submit</button>
   </div>
   <div class="control">
-    <%= link_to "Cancel", :back, {:class => "button is-link is-light"} %>
+    <%= link_to "Cancel", root_path, {:class => "button is-link is-light"} %>
   </div>
 </div>
 <% end %>
