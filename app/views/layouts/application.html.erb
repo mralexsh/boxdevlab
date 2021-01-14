@@ -2,6 +2,9 @@
 <html>
   <head>
     <title>Boxdevlab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +13,32 @@
   </head>
 
   <body>
-    <%= yield %>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <%= link_to "Create post", new_post_path, {:class => "navbar-item"} %>
+          <div class="buttons">
+            <a class="button is-primary">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light">
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+    <div class="container">
+      <div class="notification is-primary">
+        <%= notice %>
+      </div>
+      <div class="notification is-danger">
+        <%= alert %>
+      </div>
+      <%= yield %>
+    </div>    
   </body>
 </html>
