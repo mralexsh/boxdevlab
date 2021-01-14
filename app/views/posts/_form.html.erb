@@ -1,5 +1,31 @@
-<%= form_for(@post) do |p| %>
-  Post title: <%= p.text_field :title %><br />
-  Post content: <%= p.text_area :content %><br />
-  <%= p.submit %>
+<%= form_for(@post) do |f| %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+<div class="field">
+  <label class="label">Post title</label>
+  <div class="control">
+    <%= f.text_field :title, class: "input" %>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Post content</label>
+  <div class="control">
+     <%= f.text_area :content, class: "textarea" %>
+  </div>
+</div>
+
+<div class="field is-grouped">
+  <div class="control">
+    <button class="button is-link">Submit</button>
+  </div>
+  <div class="control">
+    <%= link_to "Cancel", :back, {:class => "button is-link is-light"} %>
+  </div>
+</div>
 <% end %>
+
+
+
+
+

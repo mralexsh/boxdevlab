@@ -3,7 +3,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+          <strong><%= @post.user.email%></strong> <small>at</small> <small><%= @post.updated_at %></small>
           <br>
           <%= @post.title %>
         </p>
@@ -11,17 +11,18 @@
       <nav class="level is-mobile">
         <div class="level-left">
           <%= link_to "more...", post_path(@post.id), {:class => "level-item"} %>
-          
-          <%= link_to edit_post_path(@post.id), {:class => "level-item"} do %>
-            <span class="icon is-small">
-              <i class="fas fa-edit" aria-hidden="true"></i>
-            </span>
-          <% end %>
-          
-          <%= link_to post_path(@post.id), {:class => "level-item", data: {:confirm => "Are you sure ?"}, method: :delete} do %>
-            <span class="icon is-small">
-              <i class="fas fa-trash" aria-hidden="true"></i>
-            </span>
+          <% if user_signed_in? and @post.user_id == current_user.id %>
+            <%= link_to edit_post_path(@post.id), {:class => "level-item"} do %>
+                <span class="icon is-small">
+                <i class="fas fa-edit" aria-hidden="true"></i>
+                </span>
+            <% end %>
+            
+            <%= link_to post_path(@post.id), {:class => "level-item", data: {:confirm => "Are you sure ?"}, method: :delete} do %>
+                <span class="icon is-small">
+                <i class="fas fa-trash" aria-hidden="true"></i>
+                </span>
+            <% end %>
           <% end %>
       
         </div>

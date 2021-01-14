@@ -3,7 +3,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+          <strong><%= @post.user.email%></strong> <small>at</small> <small><%= @post.updated_at %></small>
           <br>
           <%= @post.title %>
           <br>

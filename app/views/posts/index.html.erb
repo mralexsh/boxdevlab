@@ -1,3 +1,7 @@
+<% if user_signed_in? %>
+  <%= link_to "Create post", new_post_path, {:class => "navbar-item"} %>  
+<% end %>
+
 <% for  @post in @posts %>
   <%= render "post" %>
 <% end  %>
