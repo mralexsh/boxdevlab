@@ -20,21 +20,31 @@ class PostsController < ApplicationController
     end
 
     def create
-        @post = Post.new(post_params)
+        @post = Post.new(post_params)        
         flash[:notice] = 'Post was successfully created.' if @post.save
         respond_with @post, :location => root_path       
     end
 
     def update
         @post = Post.find(params[:id])
-        flash[:notice] = 'Post was successfully updated.' if @post.update(post_params)
-        respond_with @post, :location => root_path 
+        if current_user.id == @post.user_id
+            flash[:notice] = 'Post was successfully updated.' if @post.update(post_params)
+            respond_with @post, :location => root_path    
+        else
+            flash[:alert] = 'You don\'t have permission to update this post'
+            respond_with @post    
+        end         
     end
 
     def destroy
         @post = Post.find(params[:id])
-        flash[:notice] = 'Post was successfully deleted.' if @post.destroy
-        respond_with @post, :location => root_path 
+        if current_user.id == @post.user_id
+            flash[:notice] = 'Post was successfully deleted.' if @post.destroy
+            respond_with @post, :location => root_path
+        else
+            flash[:alert] = 'You don\'t have permission to delete this post'
+            respond_with @post    
+        end 
     end
 
     
